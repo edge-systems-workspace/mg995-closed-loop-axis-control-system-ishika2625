@@ -31,6 +31,19 @@ static void toggleLed() {
 }
 
 /**
+ * @brief Validate a servo angle value
+ *
+ * Servos typically accept angles in the closed interval [0, 180]. This helper
+ * returns true when `angle` falls inside that range.
+ *
+ * @param angle Angle in degrees to validate
+ * @return true if valid (0..180), false otherwise
+ */
+static bool isValidServoAngle(int angle) {
+    return (angle >= 0) && (angle <= 180);
+}
+
+/**
  * @brief Arduino setup
  *
  * Initializes serial communication and configures the onboard LED pin.
@@ -49,6 +62,10 @@ void setup() {
 	pinMode(LED_PIN, OUTPUT);
 	digitalWrite(LED_PIN, LOW);
 	lastToggleMs = millis();
+
+	// Quick demo: validate a sample servo angle and report over Serial
+	Serial.print("[INFO] Servo angle 90 valid: ");
+	Serial.println(isValidServoAngle(90) ? "yes" : "no");
 }
 
 /**
