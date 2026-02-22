@@ -57,5 +57,19 @@ void setup() {
  * Toggles the onboard LED at a fixed interval and emits a heartbeat over Serial.
  */
 void loop() {
-	// write your code here
+	unsigned long now = millis();
+
+	// Toggle LED at BLINK_INTERVAL_MS intervals (non-blocking)
+	if ((now - lastToggleMs) >= BLINK_INTERVAL_MS) {
+		lastToggleMs = now;
+		toggleLed();
+	}
+
+	// Periodically emit a heartbeat message (every 5 seconds)
+	static unsigned long lastHeartbeat = 0UL;
+	if ((now - lastHeartbeat) >= 5000UL) {
+		lastHeartbeat = now;
+		Serial.print("[HEARTBEAT] millis=");
+		Serial.println(now);
+	}
 }
