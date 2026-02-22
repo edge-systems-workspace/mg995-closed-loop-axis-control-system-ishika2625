@@ -11,7 +11,7 @@
 #include <Arduino.h>
 
 /// Blink interval in milliseconds
-static const unsigned long BLINK_INTERVAL_MS = 500UL;
+static constexpr unsigned long BLINK_INTERVAL_MS = 500UL;
 
 /// Onboard LED pin (board-defined)
 static const uint8_t LED_PIN = LED_BUILTIN;
