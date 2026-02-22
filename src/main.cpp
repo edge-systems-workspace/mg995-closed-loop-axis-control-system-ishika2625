@@ -13,6 +13,23 @@
 /// Blink interval in milliseconds
 static const unsigned long BLINK_INTERVAL_MS = 500UL;
 
+/// Onboard LED pin (board-defined)
+static const uint8_t LED_PIN = LED_BUILTIN;
+
+/// Track LED state and timing
+static bool ledState = false;
+static unsigned long lastToggleMs = 0UL;
+
+/**
+ * @brief Toggle the onboard LED state
+ *
+ * This helper flips the `ledState` and writes it to the pin.
+ */
+static void toggleLed() {
+	ledState = !ledState;
+	digitalWrite(LED_PIN, ledState ? HIGH : LOW);
+}
+
 /**
  * @brief Arduino setup
  *
