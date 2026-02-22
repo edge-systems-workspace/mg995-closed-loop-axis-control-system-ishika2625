@@ -36,7 +36,19 @@ static void toggleLed() {
  * Initializes serial communication and configures the onboard LED pin.
  */
 void setup() {
-	// write your initialization code here
+	// Initialize serial console for debugging
+	Serial.begin(115200);
+	// Allow some time for the serial port to come up on native USB boards
+	unsigned long start = millis();
+	while (!Serial && (millis() - start) < 2000) {
+		; // wait up to 2s
+	}
+	Serial.println("[INFO] Starting MG995 closed-loop axis control (demo)");
+
+	// Configure LED pin
+	pinMode(LED_PIN, OUTPUT);
+	digitalWrite(LED_PIN, LOW);
+	lastToggleMs = millis();
 }
 
 /**
